@@ -17,7 +17,7 @@ export default function Home() {
       .then(data => setArticles(data));
   }, [category]);
 
-  const loadComments = async (articleId) => {
+  const loadComments = async (articleId: string) => {
     const res = await fetch(`/api/comments?articleId=${articleId}`);
     const data = await res.json();
     setComments(prev => ({ ...prev, [articleId]: data }));
