@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const { data: session } = useSession();
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<any[]>([]);
   const [category, setCategory] = useState('geopolitics');
-  const [comments, setComments] = useState({});
-  const [commentText, setCommentText] = useState({});
+  const [comments, setComments] = useState<{[key: string]: any[]}>({});
+  const [commentText, setCommentText] = useState<{[key: string]: string}>({});
 
   const categories = ['geopolitics', 'entertainment', 'crime', 'technology', 'sports'];
 
@@ -40,8 +40,8 @@ export default function Home() {
         <h1 className="text-3xl font-bold">AI Daily News</h1>
         {session ? (
           <div className="flex items-center gap-3">
-            <img src={session.user.image} className="w-8 h-8 rounded-full" />
-            <span className="text-sm">{session.user.name}</span>
+            <img src={session.user?.image ?? ''} className="w-8 h-8 rounded-full" />
+            <span className="text-sm">{session.user?.name}</span>
             <button onClick={() => signOut()} className="text-sm text-red-500">Sign out</button>
           </div>
         ) : (
@@ -77,9 +77,9 @@ export default function Home() {
                 Show comments
               </button>
               <div className="mt-2 space-y-2">
-                {(comments[article._id] || []).map(c => (
+                {(comments[article._id] || []).map((c: any) => (
                   <div key={c._id} className="flex gap-2 items-start">
-                    <img src={c.userImage} className="w-6 h-6 rounded-full mt-1" />
+                    <img src={c.userImage ?? ''} className="w-6 h-6 rounded-full mt-1" />
                     <div>
                       <span className="text-xs font-semibold">{c.userName}</span>
                       <p className="text-sm text-gray-600">{c.text}</p>
