@@ -23,7 +23,7 @@ export default function Home() {
     setComments(prev => ({ ...prev, [articleId]: data }));
   };
 
-  const postComment = async (articleId) => {
+  const postComment = async (articleId: string) => {
     if (!commentText[articleId]) return;
     await fetch('/api/comments', {
       method: 'POST',
